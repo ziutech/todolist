@@ -1,1 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
+$antique-brass: #b98b73ff;
+$antique-brass-2: #cb997eff;
+$desert-sand: #ddbea9ff;
+$champagne-pink: #ffe8d6ff;
+$bone: #d4c7b0ff;
+$ash-gray: #b7b7a4ff;
+$artichoke: #a5a58dff;
+$ebony: #6b705cff;
+$black-olive: #3f4238ff;
 
+button {
+  appearance: none;
+  background-color: $artichoke;
+  border: 3px solid $black-olive;
+  font-weight: 700;
+  color: $black-olive;
+}
+
+body {
+  font-family: "Oxygen", sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100vh;
+  color: $champagne-pink;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+
+  height: 9vh;
+  background-color: $ebony;
+  padding: 10px 10px;
+  h1 {
+    letter-spacing: 5px;
+    font-weight: 700;
+  }
+  #topbar-icons {
+    display: flex;
+    align-items: center;
+    button {
+      height: 50px;
+    }
+  }
+}
+
+main {
+  background-color: $artichoke;
+  height: 90vh;
+
+  display: flex;
+  nav {
+    border-top: 7px solid $artichoke;
+    background-color: $ebony;
+    height: 100%;
+    width: 20vw;
+  }
+}
+
+.todos {
+  ul {
+    list-style: none;
+  }
+}
