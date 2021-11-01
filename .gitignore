@@ -1,0 +1,5 @@
+dist
+.parcel-cache
+node_modules
+node_modules/browserify-sign/LICENSE
+node_modules/browserify-rsa/package.json

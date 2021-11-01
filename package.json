@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/KrzysztofZduniak/todolist/issues"
   },
-  "homepage": "https://github.com/KrzysztofZduniak/todolist#readme"
+  "homepage": "https://github.com/KrzysztofZduniak/todolist#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.0",
+    "parcel": "^2.0.0"
+  }
 }
