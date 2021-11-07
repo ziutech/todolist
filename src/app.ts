@@ -4,3 +4,8 @@ if (module.hot) {
     location.reload();
   });
 }
+
+Todos.add("Buy milk", 0);
+console.log(Todos.get());
+
+Todos.update();

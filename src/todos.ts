@@ -1,27 +1,63 @@
-import { addToLocalStorage } from "./localstorage";
+import Display from "./display";
+import Storage from "./localstorage";
 
 export class Task {
   name: string;
-  importance: number;
-  due: Date;
-  constructor(name: string, importance: number, due: Date) {
+  private importance: number;
+  private due?: Date;
+  constructor(name: string, importance: number, due?: Date) {
     this.name = name;
     this.importance = importance;
     this.due = due;
   }
+  get date(): string {
+    const date = this.due?.toDateString() as string;
+    return date;
+  }
 }
 
 const Todos = (() => {
-  let list: Task[] = [];
-  const addTask = (name: string, importance: number, due: Date) => {
+  const add = (name: string, importance: number, due?: Date) => {
     const task = new Task(name, importance, due);
-    list.push(task);
-    addToLocalStorage(task);
+    Storage.add(task);
   };
-  const getTasks = () => {
-    return list;
+  const remove = (task: Task) => {
+    Storage.remove(task);
   };
-  return { addTask, getTasks };
+  const get = () => {
+    const tasks: Task[] = Storage.read();
+    return tasks;
+  };
+  const update = () => {
+    Display.show(get());
+  };
+  const clear = () => {
+    Storage.clear();
+  };
+  return {
+    add,
+    remove,
+    get,
+    update,
+    clear,
+  };
 })();
 
 export default Todos;
+// export default class Todos {
+//   name: string;
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+//   add(name: string, importance: number, due: Date) {
+//     const task = new Task(name, importance, due);
+//     Storage.add(task);
+//   }
+//   remove(task: Task) {
+//     Storage.remove(task);
+//   }
+//   update() {
+//     const tasks: Task[] = Storage.read();
+//     Display.show(tasks, this.name);
+//   }
+// }
