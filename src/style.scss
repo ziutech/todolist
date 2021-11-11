@@ -8,13 +8,23 @@ $ash-gray: #b7b7a4ff;
 $artichoke: #a5a58dff;
 $ebony: #6b705cff;
 $black-olive: #3f4238ff;
+$interspace: 10px;
+$rounding: 4px;
 
 button {
   appearance: none;
   background-color: $artichoke;
-  border: 3px solid $black-olive;
+  border: none;
+  border-radius: 50%;
   font-weight: 700;
   color: $black-olive;
+  height: 40px;
+  width: 40px;
+  font-size: 20px;
+}
+
+ul {
+  list-style-type: disc;
 }
 
 body {
@@ -29,19 +39,24 @@ body {
 header {
   display: flex;
   justify-content: space-between;
-
-  height: 9vh;
+  align-items: center;
   background-color: $ebony;
-  padding: 10px 10px;
-  h1 {
-    letter-spacing: 5px;
+  border-radius: $rounding;
+  padding: 10px;
+  h1,
+  h2 {
+    letter-spacing: 3px;
     font-weight: 700;
   }
+}
+
+#topbar {
+  height: 9vh;
+  border-bottom: $interspace solid $artichoke;
   #topbar-icons {
     display: flex;
     align-items: center;
     button {
-      height: 50px;
     }
   }
 }
@@ -49,18 +64,53 @@ header {
 main {
   background-color: $artichoke;
   height: 90vh;
-
   display: flex;
   nav {
-    border-top: 7px solid $artichoke;
     background-color: $ebony;
+    border-radius: $rounding;
     height: 100%;
-    width: 20vw;
+    width: 300px;
   }
 }
 
 .todos {
-  ul {
-    list-style: none;
+  padding: 0px $interspace;
+  h2 {
+    background-color: $ebony;
+    margin: 0;
+  }
+  width: 500px;
+  border-right: $interspace solid $ebony;
+}
+
+.filter {
+  i {
+    position: relative;
+    top: 2px;
+  }
+}
+
+.task {
+  background-color: $black-olive;
+  border-radius: $rounding;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  button {
+    background-color: $ebony;
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    left: -30px;
+    height: 20px;
+    width: 20px;
+    &:hover {
+      background-color: $black-olive;
+    }
+  }
+  i {
+    opacity: 50%;
   }
 }

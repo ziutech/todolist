@@ -4,30 +4,64 @@
     <meta charset="utf-8" />
     <title>My First Parcel App</title>
     <link rel="stylesheet" href="style.scss" />
+    <script
+      src="https://kit.fontawesome.com/c3deb9adf9.js"
+      crossorigin="anonymous"
+    ></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <header>
+    <header id="topbar">
       <h1>TODOLIST</h1>
       <div id="topbar-icons">
-        <button>SETTINGS</button>
+        <button><i class="fas fa-cogs"></i></button>
       </div>
     </header>
     <main>
       <nav></nav>
       <section class="todos">
+        <header>
+          <h2>Today</h2>
+          <div class="todos-buttons">
+            <button class="filter"><i class="fas fa-filter"></i></button>
+            <button class="add"><i class="fas fa-plus"></i></button>
+            <button class="clear"><i class="fas fa-trash"></i></button>
+          </div>
+        </header>
         <ul>
-          <li>TODO</li>
-          <li>TODO</li>
-          <li>TODO</li>
-          <li>TODO</li>
-          <li>TODO</li>
-          <li>TODO</li>
-          <li>TODO</li>
-          <li>TODO</li>
+          <li class="task">
+            <button class="check"></button>
+            <span>Text Content</span>
+            <i>deadline: 30.12.2021</i>
+          </li>
+          <li class="task">
+            <button class="check"></button>
+            <span>Text Content</span>
+            <i>deadline: 30.12.2021</i>
+          </li>
+          <li class="task">
+            <button class="check"></button>
+            <span>Text Content</span>
+            <i>deadline: 30.12.2021</i>
+          </li>
+          <li class="task">
+            <button class="check"></button>
+            <span>Text Content</span>
+            <i>deadline: 30.12.2021</i>
+          </li>
+          <li class="task">
+            <button class="check"></button>
+            <span>Text Content</span>
+            <i>deadline: 30.12.2021</i>
+          </li>
+          <li class="task">
+            <button class="check"></button>
+            <span>Text Content</span>
+            <i>deadline: 30.12.2021</i>
+          </li>
         </ul>
       </section>
     </main>
-    <script ript type="module" src="app.js"></script>
+    <script ript type="module" src="app.ts"></script>
   </body>
 </html>
