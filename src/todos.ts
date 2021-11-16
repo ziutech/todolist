@@ -7,18 +7,14 @@ export class Task {
   due: Date;
   constructor(name: string, importance: number = 0, due: string | Date) {
     this.name = name;
-    this.importance = importance;
+    if (importance < 0) this.importance = -1;
+    else if (importance > 0) this.importance = 1;
+    else this.importance = 0;
     this.due = new Date(due);
   }
   get date() {
     return this.due.toDateString();
   }
-}
-
-enum SortBy {
-  Date,
-  Name,
-  Importance,
 }
 
 const Todos = (() => {
@@ -30,6 +26,12 @@ const Todos = (() => {
   const remove = (task: Task) => {
     Storage.remove(task);
   };
+
+  enum SortBy {
+    Date,
+    Name,
+    Importance,
+  }
 
   const sort = (tasks: Task[], by: SortBy = SortBy.Name): Task[] => {
     switch (by) {
@@ -46,10 +48,59 @@ const Todos = (() => {
     }
   };
 
-  const filter = (tasks: Task[]) => {};
+  const filter = (
+    tasks: Task[],
+    {
+      text,
+      from,
+      to,
+      importance = [],
+    }: {
+      text?: string;
+      from?: Date;
+      to?: Date;
+      importance?: number[];
+    }
+  ) => {
+    console.clear();
+    return tasks
+      .filter((task) =>
+        text !== undefined ? task.name.search(text) > -1 : true
+      )
+      .filter((task) => {
+        if (from !== undefined && to !== undefined)
+          return (
+            from.getTime() <= task.due.getTime() &&
+            task.due.getTime() <= to.getTime()
+          );
+        else if (to !== undefined) return task.due.getTime() <= to.getTime();
+        else if (from !== undefined)
+          return from.getTime() <= task.due.getTime();
+        else return true;
+      })
+      .filter((task) => {
+        if (importance.length == 0) {
+          return true;
+        }
+        console.log(task.importance);
+        for (let i = 0; i < importance.length; i++) {
+          if (importance[i] == task.importance) {
+            return true;
+          }
+        }
+        return false;
+      });
+  };
 
   const get = () => {
-    const tasks: Task[] = sort(Storage.read(), SortBy.Name);
+    const tasks: Task[] = sort(
+      filter(Storage.read(), {
+        text: "a",
+        from: new Date("2021-2-12"),
+      }),
+      SortBy.Importance
+    );
+    // const tasks: Task[] = sort(Storage.read(), SortBy.Date);
     return tasks;
   };
   const update = () => {
@@ -68,20 +119,3 @@ const Todos = (() => {
 })();
 
 export default Todos;
-// export default class Todos {
-//   name: string;
-//   constructor(name: string) {
-//     this.name = name;
-//   }
-//   add(name: string, importance: number, due: Date) {
-//     const task = new Task(name, importance, due);
-//     Storage.add(task);
-//   }
-//   remove(task: Task) {
-//     Storage.remove(task);
-//   }
-//   update() {
-//     const tasks: Task[] = Storage.read();
-//     Display.show(tasks, this.name);
-//   }
-// }
