@@ -3,29 +3,56 @@ import Storage from "./localstorage";
 
 export class Task {
   name: string;
-  private importance: number;
-  private due?: Date;
-  constructor(name: string, importance: number, due?: Date) {
+  importance: number;
+  due: Date;
+  constructor(name: string, importance: number = 0, due: string | Date) {
     this.name = name;
     this.importance = importance;
-    this.due = due;
+    this.due = new Date(due);
   }
-  get date(): string {
-    const date = this.due?.toDateString() as string;
-    return date;
+  get date() {
+    return this.due.toDateString();
   }
 }
 
+enum SortBy {
+  Date,
+  Name,
+  Importance,
+}
+
 const Todos = (() => {
-  const add = (name: string, importance: number, due?: Date) => {
+  const add = (name: string, importance: number, due: Date) => {
     const task = new Task(name, importance, due);
     Storage.add(task);
   };
+
   const remove = (task: Task) => {
     Storage.remove(task);
   };
+
+  const sort = (tasks: Task[], by: SortBy = SortBy.Name): Task[] => {
+    switch (by) {
+      case SortBy.Name:
+        tasks = tasks.sort((a, b) => {
+          if (a.name > b.name) return -1;
+          else if (a.name < b.name) return 1;
+          else return 0;
+        });
+      case SortBy.Date:
+        tasks = tasks.sort((a, b) => b.due.getTime() - a.due.getTime());
+      case SortBy.Importance:
+        tasks = tasks.sort((a, b) => {
+          if (a.importance > b.importance) return -1;
+          else if (a.importance < b.importance) return 1;
+          else return 0;
+        });
+    }
+    return tasks;
+  };
+
   const get = () => {
-    const tasks: Task[] = Storage.read();
+    const tasks: Task[] = sort(Storage.read(), SortBy.Date);
     return tasks;
   };
   const update = () => {

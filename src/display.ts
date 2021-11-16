@@ -17,8 +17,12 @@ const Display = (() => {
     el.appendChild(h3);
 
     const date = document.createElement("div");
-    date.textContent = task.due.toDateString();
+    date.textContent = task.date;
     el.appendChild(date);
+
+    const importance = document.createElement("div");
+    importance.textContent = task.importance.toLocaleString();
+    el.appendChild(importance);
     return el;
   };
   return { show };
