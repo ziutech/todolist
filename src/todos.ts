@@ -34,25 +34,22 @@ const Todos = (() => {
   const sort = (tasks: Task[], by: SortBy = SortBy.Name): Task[] => {
     switch (by) {
       case SortBy.Name:
-        tasks = tasks.sort((a, b) => {
-          if (a.name > b.name) return -1;
-          else if (a.name < b.name) return 1;
-          else return 0;
-        });
+        return tasks.sort((a, b) => a.name.localeCompare(b.name));
       case SortBy.Date:
-        tasks = tasks.sort((a, b) => b.due.getTime() - a.due.getTime());
+        return tasks.sort((a, b) => b.due.getTime() - a.due.getTime());
       case SortBy.Importance:
-        tasks = tasks.sort((a, b) => {
+        return tasks.sort((a, b) => {
           if (a.importance > b.importance) return -1;
           else if (a.importance < b.importance) return 1;
           else return 0;
         });
     }
-    return tasks;
   };
 
+  const filter = (tasks: Task[]) => {};
+
   const get = () => {
-    const tasks: Task[] = sort(Storage.read(), SortBy.Date);
+    const tasks: Task[] = sort(Storage.read(), SortBy.Name);
     return tasks;
   };
   const update = () => {
