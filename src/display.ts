@@ -4,11 +4,10 @@ const Display = (() => {
   const show = (list: Task[]) => {
     const obj = document.querySelector(".todolist");
     for (let task of list) {
-      console.log(task);
-
       obj?.appendChild(createTaskElement(task));
     }
   };
+
   const createTaskElement = (task: Task): HTMLDivElement => {
     const el = document.createElement("div");
     el.classList.add("task");
@@ -18,9 +17,8 @@ const Display = (() => {
     el.appendChild(h3);
 
     const date = document.createElement("div");
-    date.textContent = task.date;
+    date.textContent = task.due.toDateString();
     el.appendChild(date);
-
     return el;
   };
   return { show };

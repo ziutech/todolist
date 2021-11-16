@@ -15,7 +15,12 @@ const Storage = (() => {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       const json = localStorage.getItem(key!);
-      const task = JSON.parse(json!);
+      const notParsed = JSON.parse(json!);
+      const task: Task = new Task(
+        notParsed.name,
+        notParsed.importance,
+        new Date(notParsed.due)
+      );
       list.push(task);
     }
     return list;
